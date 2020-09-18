@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/json-styles.css" />
+    <title>JSON Data</title>
+  </head>
+  <body>
+    <div class="container">
+      <ul id="personPets"></ul>
+    </div>
+  </body>
+  <script>
+    var output = "";
+    fetch("littledata.json")
+      .then((resp) => resp.json())
+      .then((json) => json.filter((person) => person.age > 15))
+      .then((json) =>
+        json.map((person) => {
+          document.getElementById(
+            "personPets"
+          ).innerHTML += `<li><span class="fname">${person.firstName}</span> has <span class="pets">${person.pets}</span> is aged ${person.age}, lives in ${person.address.street}, ${person.address.city}, ${person.address.state}. </li>`;
+        })
+      );
+    console.log(output);
+  </script>
+</html>
